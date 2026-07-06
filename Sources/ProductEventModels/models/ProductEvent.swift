@@ -28,10 +28,12 @@ public enum MiniplayerSeekValue: String {
 public struct ProductEvent {
     public let name: String
     public let attributes: [String: String]?
+    public let requirePageView: Bool?
 
-    fileprivate init(name: String, attributes: [String: String]? = nil) {
+    fileprivate init(name: String, attributes: [String: String]? = nil, requirePageView: Bool? = nil) {
         self.name = name
         self.attributes = attributes
+        self.requirePageView = requirePageView
     }
 }
 
@@ -112,7 +114,8 @@ extension ProductEvent {
                 attributes: [
                     "value": value,
                     "source": source
-                ]
+                ],
+                requirePageView: true
             )
         }
 
