@@ -30,15 +30,18 @@ extension ProductEvent {
         /// - Parameters:
         ///   - value: Which settings toggle
         ///   - source: Which settings screen
+        ///   - method: What method was used to toggle autoplay
         public static func autoplayToggled(
             value: AutoplayToggledValue,
-            source: AutoplayToggledSource
+            source: AutoplayToggledSource,
+            method: String
         ) -> ProductEvent {
             ProductEvent(
                 name: "autoplay_toggled",
                 attributes: [
                     "value": value.rawValue,
-                    "source": source.rawValue
+                    "source": source.rawValue,
+                    "method": method
                 ]
             )
         }
