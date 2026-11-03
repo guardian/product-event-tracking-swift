@@ -10,11 +10,6 @@ public enum AutoplayToggledValue: String {
 public enum AutoplayToggledSource: String {
     case settings
 }
-
-public enum NotificationSubscribedSource: String {
-    case settings
-    case article
-}
 public struct ProductEvent {
     public let name: String
     public let attributes: [String: String]?
@@ -88,29 +83,6 @@ extension ProductEvent {
                     "source": source
                 ],
                 requirePageView: true
-            )
-        }
-    }
-}
-
-extension ProductEvent {
-    public enum Notifications {
-
-        /// User subscribed to a notification
-        ///
-        /// - Parameters:
-        ///   - value: Notification identifier
-        ///   - source: Where event took place, eg. settings, article
-        public static func notificationSubscribed(
-            value: String,
-            source: NotificationSubscribedSource
-        ) -> ProductEvent {
-            ProductEvent(
-                name: "notification_subscribed",
-                attributes: [
-                    "value": value,
-                    "source": source.rawValue
-                ]
             )
         }
     }
