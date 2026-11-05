@@ -2,6 +2,35 @@ import Foundation
 
 // AUTO-GENERATED - DO NOT EDIT
 
+public enum SigninGateShownSource: String {
+    case article
+}
+
+public enum SigninGateShownValue: String {
+    case dismissibleGate
+    case mandatoryGate
+}
+
+public enum SigninGateDismissedSource: String {
+    case article
+}
+
+public enum SigninGateDismissedValue: String {
+    case dismissibleGate
+}
+
+public enum SigninStartedSource: String {
+    case signinGate
+    case myguardian
+    case settings
+}
+
+public enum SigninStartedMethod: String {
+    case email
+    case google
+    case apple
+}
+
 public enum AutoplayToggledValue: String {
     case `true`
     case `false`
@@ -24,6 +53,86 @@ public struct ProductEvent {
         self.name = name
         self.attributes = attributes
         self.requirePageView = requirePageView
+    }
+}
+
+extension ProductEvent {
+    public enum Signingate {
+
+        /// Sign in gate was shown after reaching the article limit
+        ///
+        /// - Parameters:
+        ///   - source: Where the gate was shown
+        ///   - value: Which gate variant was shown
+        public static func signinGateShown(
+            source: SigninGateShownSource,
+            value: SigninGateShownValue
+        ) -> ProductEvent {
+            ProductEvent(
+                name: "signin_gate_shown",
+                attributes: [
+                    "source": source.rawValue,
+                    "value": value.rawValue
+                ],
+                requirePageView: true
+            )
+        }
+
+        /// User dismissed the sign in gate
+        ///
+        /// - Parameters:
+        ///   - source: Where the gate was dismissed
+        ///   - value: Which gate variant was dismissed
+        public static func signinGateDismissed(
+            source: SigninGateDismissedSource,
+            value: SigninGateDismissedValue
+        ) -> ProductEvent {
+            ProductEvent(
+                name: "signin_gate_dismissed",
+                attributes: [
+                    "source": source.rawValue,
+                    "value": value.rawValue
+                ],
+                requirePageView: true
+            )
+        }
+
+        /// User started signing in
+        ///
+        /// - Parameters:
+        ///   - source: Where sign in started
+        ///   - method: How the user chose to sign in
+        public static func signinStarted(
+            source: SigninStartedSource,
+            method: SigninStartedMethod
+        ) -> ProductEvent {
+            ProductEvent(
+                name: "signin_started",
+                attributes: [
+                    "source": source.rawValue,
+                    "method": method.rawValue
+                ],
+                requirePageView: true
+            )
+        }
+
+        /// A quick test
+        ///
+        /// - Parameters:
+        ///   - source: Where....
+        ///   - method: How....
+        public static func gateTest(
+            source: String,
+            method: String
+        ) -> ProductEvent {
+            ProductEvent(
+                name: "gate_test",
+                attributes: [
+                    "source": source,
+                    "method": method
+                ]
+            )
+        }
     }
 }
 
